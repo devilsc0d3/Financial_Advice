@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun settingContent() {
+fun SettingContent() {
     Column (
         Modifier
             .background(color = Color(31, 31, 31))
@@ -29,19 +29,19 @@ fun settingContent() {
         Header("Settings")
 
         Title("General")
-        widget("Language", Color.White) {}
-        widget("Theme", Color.White) {}
+        Widget("Language", Color.White) {}
+        Widget("Theme", Color.White) {}
 
         Title("data")
-        widget("share", Color.White) {}
-        widget("import", Color.White) {}
-        widget("export", Color.White) {}
-        widget("Clear cache", Color.Red) {}
+        Widget("share", Color.White) {}
+        Widget("import", Color.White) {}
+        Widget("export", Color.White) {}
+        Widget("Clear cache", Color.Red) {}
 
         Title("Assistance")
-        widget("parent", Color.White) {}
-        widget("contact", Color.White) {}
-        widget("CGU", Color.White) {}
+        Widget("parent", Color.White) {}
+        Widget("contact", Color.White) {}
+        Widget("CGU", Color.White) {}
 
     }
 
@@ -49,7 +49,7 @@ fun settingContent() {
 
 
 @Composable
-fun widget(txt : String, color: Color, onClick: () -> Unit) {
+fun Widget(txt : String, color: Color, onClick: () -> Unit) {
 
     Row (
         Modifier

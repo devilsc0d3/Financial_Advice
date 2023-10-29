@@ -52,40 +52,40 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            com.example.financial_advice.app.settings.settingContent();
-//            Financial_AdviceTheme {
-//                var showDialog by remember { mutableStateOf(false) } // Nouvel état
-//
-//                Column(
-//                    Modifier
-//                        .fillMaxSize()
-//                        .verticalScroll(rememberScrollState())
-//                        .background(color = Color(31, 31, 31))
-//                ) {
-//
-//                    Header("Financial_Advice")
-//
-//                    PieChart(
-//                        data = listOf(20f, 30f, 50f),
-//                        colors = listOf(
-//                            Color.hsl(hue = 0.1F, saturation = 0.3F, lightness = 0.24F),
-//                            Color(24, 106, 59),
-//                            Color(27, 79, 114)
-//                        )
-//                    )
-//
-//                    FilledButtonExample {
-//                        showDialog = true // Afficher la boîte de dialogue
-//                    }
-//                    for (message in messages) {
-//                        Message(message, "Caf", Color.White, 15.sp, FontWeight.W400)
-//                    }
-//
-//                    if (showDialog) {
-//                        alertDialogTest(onDismiss = { showDialog = false }) // Passer une fonction pour masquer la boîte de dialogue
-//                    }
-//                }
-//            }
+            //            com.example.financial_advice.app.settings.SettingContent();
+            Financial_AdviceTheme {
+                var showDialog by remember { mutableStateOf(false) }
+
+                Column(
+                    Modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState())
+                        .background(color = Color(31, 31, 31))
+                ) {
+
+                    Header("Financial_Advice")
+
+                    PieChart(
+                        data = listOf(20f, 30f, 50f),
+                        colors = listOf(
+                            Color.hsl(hue = 0.1F, saturation = 0.3F, lightness = 0.24F),
+                            Color(24, 106, 59),
+                            Color(27, 79, 114)
+                        )
+                    )
+
+                    FilledButtonExample {
+                        showDialog = true
+                    }
+                    for (message in messages) {
+                        Message(message, "Caf", Color.White, 15.sp, FontWeight.W400)
+                    }
+
+                    if (showDialog) {
+                        AlertDialogTest(onDismiss = { showDialog = false }) // Passer une fonction pour masquer la boîte de dialogue
+                    }
+                }
+            }
         }
     }
 }
@@ -214,7 +214,7 @@ fun PieChart(data: List<Float>, colors: List<Color>) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun alertDialogTest(onDismiss: () -> Unit) {
+fun AlertDialogTest(onDismiss: () -> Unit) {
     val openDialog = remember { mutableStateOf(true) }
     var text by remember { mutableStateOf("0") }
 
@@ -222,13 +222,13 @@ fun alertDialogTest(onDismiss: () -> Unit) {
         AlertDialog(
             onDismissRequest = {
                 openDialog.value = false
-                onDismiss() // Appeler la fonction onDismiss passée en paramètre
+                onDismiss()
             },
             title = {
                 Text(text = "entre une valeur")
             },
             text = {
-                Column() {
+                Column {
                     TextField(
                         value = text,
                         onValueChange = { text = it }
