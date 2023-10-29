@@ -52,39 +52,40 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Financial_AdviceTheme {
-                var showDialog by remember { mutableStateOf(false) } // Nouvel état
-
-                Column(
-                    Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState())
-                        .background(color = Color(31, 31, 31))
-                ) {
-
-                    Header("Financial_Advice")
-
-                    PieChart(
-                        data = listOf(20f, 30f, 50f),
-                        colors = listOf(
-                            Color.hsl(hue = 0.1F, saturation = 0.3F, lightness = 0.24F),
-                            Color(24, 106, 59),
-                            Color(27, 79, 114)
-                        )
-                    )
-
-                    FilledButtonExample {
-                        showDialog = true // Afficher la boîte de dialogue
-                    }
-                    for (message in messages) {
-                        Message(message, "Caf", Color.White, 15.sp, FontWeight.W400)
-                    }
-
-                    if (showDialog) {
-                        alertDialogTest(onDismiss = { showDialog = false }) // Passer une fonction pour masquer la boîte de dialogue
-                    }
-                }
-            }
+            com.example.financial_advice.app.settings.settingContent();
+//            Financial_AdviceTheme {
+//                var showDialog by remember { mutableStateOf(false) } // Nouvel état
+//
+//                Column(
+//                    Modifier
+//                        .fillMaxSize()
+//                        .verticalScroll(rememberScrollState())
+//                        .background(color = Color(31, 31, 31))
+//                ) {
+//
+//                    Header("Financial_Advice")
+//
+//                    PieChart(
+//                        data = listOf(20f, 30f, 50f),
+//                        colors = listOf(
+//                            Color.hsl(hue = 0.1F, saturation = 0.3F, lightness = 0.24F),
+//                            Color(24, 106, 59),
+//                            Color(27, 79, 114)
+//                        )
+//                    )
+//
+//                    FilledButtonExample {
+//                        showDialog = true // Afficher la boîte de dialogue
+//                    }
+//                    for (message in messages) {
+//                        Message(message, "Caf", Color.White, 15.sp, FontWeight.W400)
+//                    }
+//
+//                    if (showDialog) {
+//                        alertDialogTest(onDismiss = { showDialog = false }) // Passer une fonction pour masquer la boîte de dialogue
+//                    }
+//                }
+//            }
         }
     }
 }
