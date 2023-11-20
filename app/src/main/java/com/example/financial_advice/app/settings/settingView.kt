@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,16 +16,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.example.financial_advice.app.core.Screens
 
 
 @Composable
-fun SettingContent() {
+fun SettingContent(navController: NavHostController) {
     Column (
         Modifier
             .background(color = Color(31, 31, 31))
             .height(800.dp)
     ){
-        Header("Settings")
+        Header(navController, "Settings")
 
         Title("General")
         Widget("Language", Color.White) {}
@@ -50,13 +51,14 @@ fun SettingContent() {
 
 @Composable
 fun Widget(txt : String, color: Color, onClick: () -> Unit) {
-
     Row (
         Modifier
             .clickable { onClick() }
-            .width(500.dp)
-            .padding(start = 15.dp, end = 21.dp, bottom = 6.5.dp, top = 6.5.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .fillMaxWidth()
+            .padding(start = 15.dp, end = 15.dp, bottom = 10.dp, top = 10.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+
     ) {
         Text(
             text = txt,
@@ -68,7 +70,7 @@ fun Widget(txt : String, color: Color, onClick: () -> Unit) {
         Text(
             text = "  >",
             fontWeight = FontWeight.W600,
-            fontSize = 23.sp,
+            fontSize = 25.sp,
             color = color
         )
     }
@@ -90,7 +92,7 @@ fun Title(txt : String) {
 }
 
 @Composable
-fun Header(txt: String) {
+fun Header(navController: NavHostController, txt: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
@@ -106,6 +108,17 @@ fun Header(txt: String) {
             fontWeight = FontWeight.W800,
             fontSize = 25.sp,
             modifier = Modifier.padding(15.dp,0.dp)
+        )
+        Text(
+            text = "home",
+            color = Color.White,
+            fontWeight = FontWeight.W800,
+            fontSize = 25.sp,
+            modifier = Modifier
+                .padding(15.dp, 0.dp)
+                .clickable {
+                    navController.navigate(Screens.Home.route)
+                }
         )
     }
 }
