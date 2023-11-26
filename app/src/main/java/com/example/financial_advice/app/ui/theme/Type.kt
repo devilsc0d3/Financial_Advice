@@ -1,4 +1,4 @@
-package com.example.financial_advice.ui.theme
+package com.example.financial_advice.app.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

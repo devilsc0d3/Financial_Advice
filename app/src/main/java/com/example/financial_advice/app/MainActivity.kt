@@ -4,15 +4,23 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.financial_advice.app.core.Screens
+import com.example.financial_advice.app.core.model.Screens
+import com.example.financial_advice.app.core.ui.Footer
+import com.example.financial_advice.app.core.ui.Header
+import com.example.financial_advice.app.data.DataContent
 import com.example.financial_advice.app.home.HomeContent
 import com.example.financial_advice.app.settings.SettingContent
-import com.example.financial_advice.ui.theme.Financial_AdviceTheme
+import com.example.financial_advice.app.ui.theme.Financial_AdviceTheme
 
 
 var money = 1200
@@ -32,10 +40,25 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun App() {
     val navController = rememberNavController()
-    NavigationManagement(navController)
+
+    Scaffold(
+        topBar = {
+            Header(navController = navController) {}
+        },
+        content =  {
+            Box(Modifier.padding(top = it.calculateTopPadding())) {
+                NavigationManagement(navController)
+            }
+        },
+        bottomBar = {
+            Footer(navController) {}
+        },
+    )
+
 }
 
 @Composable
@@ -46,6 +69,9 @@ private fun NavigationManagement(navController: NavHostController) {
         }
         composable(route = Screens.Settings.route) {
             SettingContent(navController)
+        }
+        composable(route = Screens.Data.route) {
+            DataContent(navController)
         }
     }
 }
