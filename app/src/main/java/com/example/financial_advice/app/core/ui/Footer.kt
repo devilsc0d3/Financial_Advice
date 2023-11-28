@@ -10,17 +10,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.financial_advice.R
 import com.example.financial_advice.app.core.model.Screens
 
 @Composable
 fun Footer(navController: NavHostController, onClick: () -> Unit) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround,
@@ -30,7 +36,11 @@ fun Footer(navController: NavHostController, onClick: () -> Unit) {
             .height(60.dp)
     ) {
         Icon(
-            painter = painterResource(R.drawable.data),
+            painter = if(currentDestination?.hierarchy?.any { it.route == "data"} == true) {
+                painterResource(R.drawable.data_fill)
+            } else {
+                painterResource(R.drawable.data)
+            },
             contentDescription = "data button",
             tint = Color.White,
             modifier = Modifier
@@ -43,8 +53,11 @@ fun Footer(navController: NavHostController, onClick: () -> Unit) {
                 }
         )
         Icon(
-            painter = painterResource(R.drawable.home),
-            contentDescription = "home button",
+            painter = if(currentDestination?.hierarchy?.any { it.route == "home"} == true) {
+                painterResource(R.drawable.home_fill)
+            } else {
+                painterResource(R.drawable.home)
+            },            contentDescription = "home button",
             tint = Color.White,
             modifier = Modifier
                 .padding(15.dp, 0.dp)
@@ -55,8 +68,11 @@ fun Footer(navController: NavHostController, onClick: () -> Unit) {
                 }
         )
         Icon(
-            painter = painterResource(R.drawable.setting),
-            contentDescription = "setting button",
+            painter = if(currentDestination?.hierarchy?.any { it.route == "settings"} == true) {
+                painterResource(R.drawable.setting_fill)
+            } else {
+                painterResource(R.drawable.setting)
+            },            contentDescription = "setting button",
             tint = Color.White,
             modifier = Modifier
                 .padding(15.dp, 0.dp)
