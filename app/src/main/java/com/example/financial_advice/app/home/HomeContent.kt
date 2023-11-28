@@ -12,11 +12,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -29,13 +38,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.toSize
 import com.example.financial_advice.app.messages
 import com.example.financial_advice.app.money
 import com.example.financial_advice.app.namesList
+import kotlin.math.log
 
 @Composable
 fun Message(txt: String, category: String, color: Color, size: TextUnit, weight: FontWeight, onClick: () -> Unit) {
@@ -43,7 +57,7 @@ fun Message(txt: String, category: String, color: Color, size: TextUnit, weight:
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
         modifier = Modifier
-            .background(Color(41, 41, 41, 255))
+            .background(Color(76, 158, 170, 255))
             .fillMaxWidth()
             .height(50.dp)
             .clickable { onClick() }
@@ -136,7 +150,6 @@ fun PieChart(data: List<Float>, colors: List<Color>) {
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlertDialogTest(onDismiss: () -> Unit) {
@@ -156,10 +169,14 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                 Column {
                     TextField(
                         value = text,
-                        onValueChange = { text = it }
+                        onValueChange = { text = it },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number
+                                )
                     )
+                    DropDownMenu()
                 }
             },
+
             confirmButton = {
                 Row(
                     modifier = Modifier.padding(all = 8.dp),
@@ -184,5 +201,60 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                 }
             }
         )
+    }
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropDownMenu() {
+    // TODO : If text is not in list, text add list
+    var expanded by remember { mutableStateOf(false) }
+    val suggestions = listOf("Kotlin", "Java", "Dart", "Python")
+    var selectedText by remember { mutableStateOf("") }
+    var textfieldSize by remember { mutableStateOf(Size.Zero)}
+
+    val icon = if (expanded)
+        Icons.Filled.KeyboardArrowUp
+    else
+        Icons.Filled.KeyboardArrowDown
+
+    Column(Modifier.padding(20.dp)) {
+        OutlinedTextField(
+            value = selectedText,
+            onValueChange = { selectedText = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .onGloballyPositioned { coordinates ->
+                    // This value is used to assign to the DropDown the same width
+                    textfieldSize = coordinates.size.toSize()
+                },
+            label = { Text("Label") },
+            trailingIcon = {
+                Icon(
+                    icon,
+                    "contentDescription",
+                    Modifier.clickable { expanded = !expanded }
+                )
+            },
+            enabled = true // Make the text field read-only
+
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier
+                .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
+        ) {
+            suggestions.forEach { label ->
+                DropdownMenuItem(
+                    onClick = {
+                        selectedText = label
+                        expanded = false
+                    },
+                    text = {
+                        Text(text = label)
+                    },
+                )
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ import com.example.financial_advice.app.core.ui.Header
 import com.example.financial_advice.app.data.DataContent
 import com.example.financial_advice.app.home.HomeContent
 import com.example.financial_advice.app.settings.SettingContent
-import com.example.financial_advice.app.ui.theme.Financial_AdviceTheme
+import com.example.financial_advice.app.core.ui.theme.Financial_AdviceTheme
 
 
 var money = 1200

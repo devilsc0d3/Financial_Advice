@@ -33,7 +33,7 @@ fun SettingContent(navController: NavHostController) {
         Widget("share", Color.Black,onClick = {
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "share Financial Advice ! \nfor a better manager of account")
+                putExtra(Intent.EXTRA_TEXT, "For a better manager of account, Download Financial_Advice by L.F ! ...")
                 type = "text/plain"
             }
             context.startActivity(Intent.createChooser(sendIntent, "Share via"))

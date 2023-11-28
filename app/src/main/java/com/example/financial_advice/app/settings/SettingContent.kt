@@ -28,14 +28,14 @@ fun Widget(txt : String, color: Color, onClick: () -> Unit) {
         Text(
             text = txt,
             fontWeight = FontWeight.W600,
-            fontSize = 22.sp,
+            fontSize = 15.sp,
             color = color
 
         )
         Text(
             text = "  >",
             fontWeight = FontWeight.W600,
-            fontSize = 24.sp,
+            fontSize = 16.sp,
             color = color
         )
     }
@@ -50,7 +50,7 @@ fun Title(txt : String) {
         Text(
             text = txt,
             fontWeight = FontWeight.W800,
-            fontSize = 27.sp,
+            fontSize = 18.sp,
             color = Color.Black
         )
     }
