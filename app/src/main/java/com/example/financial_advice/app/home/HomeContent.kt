@@ -49,7 +49,6 @@ import androidx.compose.ui.unit.toSize
 import com.example.financial_advice.app.messages
 import com.example.financial_advice.app.money
 import com.example.financial_advice.app.namesList
-import kotlin.math.log
 
 @Composable
 fun Message(txt: String, category: String, color: Color, size: TextUnit, weight: FontWeight, onClick: () -> Unit) {
@@ -206,11 +205,10 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DropDownMenu() {
-    // TODO : If text is not in list, text add list
     var expanded by remember { mutableStateOf(false) }
     val suggestions = listOf("Kotlin", "Java", "Dart", "Python")
     var selectedText by remember { mutableStateOf("") }
-    var textfieldSize by remember { mutableStateOf(Size.Zero)}
+    var textFieldSize by remember { mutableStateOf(Size.Zero)}
 
     val icon = if (expanded)
         Icons.Filled.KeyboardArrowUp
@@ -224,8 +222,7 @@ fun DropDownMenu() {
             modifier = Modifier
                 .fillMaxWidth()
                 .onGloballyPositioned { coordinates ->
-                    // This value is used to assign to the DropDown the same width
-                    textfieldSize = coordinates.size.toSize()
+                    textFieldSize = coordinates.size.toSize()
                 },
             label = { Text("Label") },
             trailingIcon = {
@@ -235,14 +232,13 @@ fun DropDownMenu() {
                     Modifier.clickable { expanded = !expanded }
                 )
             },
-            enabled = true // Make the text field read-only
-
+            enabled = true
         )
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
             modifier = Modifier
-                .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
+                .width(with(LocalDensity.current) { textFieldSize.width.toDp() })
         ) {
             suggestions.forEach { label ->
                 DropdownMenuItem(

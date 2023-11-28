@@ -14,12 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.example.financial_advice.app.messages
 
 
 @Composable
-fun HomeContent(navController: NavHostController) {
+fun HomeContent() {
     var showDialog by remember { mutableStateOf(false) }
     Column(
         Modifier

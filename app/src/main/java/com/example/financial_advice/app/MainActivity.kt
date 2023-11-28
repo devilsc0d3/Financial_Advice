@@ -58,20 +58,19 @@ private fun App() {
             Footer(navController) {}
         },
     )
-
 }
 
 @Composable
 private fun NavigationManagement(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screens.Home.route) {
         composable(route = Screens.Home.route) {
-            HomeContent(navController)
+            HomeContent()
         }
         composable(route = Screens.Settings.route) {
-            SettingContent(navController)
+            SettingContent()
         }
         composable(route = Screens.Data.route) {
-            DataContent(navController)
+            DataContent()
         }
     }
 }

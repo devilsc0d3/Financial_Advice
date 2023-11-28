@@ -30,7 +30,6 @@ fun Widget(txt : String, color: Color, onClick: () -> Unit) {
             fontWeight = FontWeight.W600,
             fontSize = 15.sp,
             color = color
-
         )
         Text(
             text = "  >",

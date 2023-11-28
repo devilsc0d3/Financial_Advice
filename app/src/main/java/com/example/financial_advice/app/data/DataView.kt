@@ -7,10 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 
 @Composable
-fun DataContent(navController: NavHostController) {
+fun DataContent() {
     Column(
         Modifier
             .background(color = Color(255, 255, 255, 255))
