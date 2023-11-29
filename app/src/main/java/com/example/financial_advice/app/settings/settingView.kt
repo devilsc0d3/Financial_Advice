@@ -10,10 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
 
 
 @Composable
-fun SettingContent() {
+fun SettingContent(navHostController: NavHostController) {
     Column (
         Modifier
             .background(color = Color(255, 255, 255, 255))
@@ -42,7 +43,7 @@ fun SettingContent() {
         Title("Assistance")
         Widget("parent", Color.Black) {}
         Widget("contact", Color.Black) {}
-        Widget("CGU", Color.Black) {}
+        Widget("CGU", Color.Black) { navHostController.navigate("cgu") }
     }
 
 }

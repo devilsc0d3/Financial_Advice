@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,6 +26,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -47,8 +49,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import com.example.financial_advice.app.core.model.ModelData
-import com.example.financial_advice.app.mainData
+import com.example.financial_advice.app.mainData2
 import com.example.financial_advice.app.money
+import com.example.financial_advice.app.suggestions
 
 @Composable
 fun Message(txt: String, category: String, color: Color, size: TextUnit, weight: FontWeight, onClick: () -> Unit) {
@@ -172,7 +175,7 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                         onValueChange = { text = it },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
-                    DropDownMenu { selectedValue ->
+                    DropDownMenu2 { selectedValue ->
                         selectedCategory = selectedValue
                     }
                 }
@@ -185,14 +188,15 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                 ) {
                     Button(
                         modifier = Modifier.fillMaxWidth(),
+                        colors = ButtonDefaults.buttonColors(Color(24, 91, 100, 255)),
                         onClick = {
                             openDialog.value = false
 
                             if (text != "0") {
-                                money -= text.toInt()
+                                money -= text.toFloat()
 
-                                val dat = ModelData(money = text.toInt(), description = null)
-                                addMainData(selectedCategory, Color.Red, dat)
+                                val dat = ModelData(money = text.toInt(), description = null, category = selectedCategory)
+                                mainData2.add(dat)
                             }
                             onDismiss()
                         }
@@ -207,11 +211,10 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDownMenu(onItemSelected: (String) -> Unit) {
+fun DropDownMenu2(onItemSelected: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    val suggestions = listOf("Kotlin", "Java", "restoration", "alcohol")
     var selectedText by remember { mutableStateOf("") }
-    var textFieldSize by remember { mutableStateOf(Size.Zero)}
+    var textFieldSize by remember { mutableStateOf(Size.Zero) }
 
     val icon = if (expanded)
         Icons.Filled.KeyboardArrowUp
@@ -227,7 +230,8 @@ fun DropDownMenu(onItemSelected: (String) -> Unit) {
                 .onGloballyPositioned { coordinates ->
                     textFieldSize = coordinates.size.toSize()
                 },
-            label = { Text("Label") },
+            label = { Text("Enter a category") },
+            readOnly = true,
             trailingIcon = {
                 Icon(
                     icon,
@@ -259,11 +263,38 @@ fun DropDownMenu(onItemSelected: (String) -> Unit) {
     }
 }
 
-fun addMainData(category: String,color: Color, data: ModelData) {
-    if (mainData.containsKey(category)) {
-        val list = mainData[category]?.second?.toMutableList()
-        list?.add(data)
-        mainData += mainData.plus(Pair(category, Pair(color, list?.toList()!!))).toMap()
-    } else
-    mainData += mainData.plus(Pair(category, Pair(color, listOf(data)))).toMap()
+
+@Composable
+fun Diagram(finalValue: Float, variableValue: Float) {
+    val percentage = variableValue / finalValue
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "Diagram de progression", color = Color.Gray, fontSize = 20.sp, fontWeight = FontWeight(800))
+            Text(
+                text = money.toString(),
+                color = Color.Gray,
+                fontSize = 40.sp,
+                fontWeight = FontWeight(800),
+            )
+            Spacer(modifier = Modifier.height(25.dp))
+            LinearProgressIndicator(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(32.dp),
+                progress = percentage,
+                color = Color(24, 91, 100, 255),
+            )
+        }
+    }
 }

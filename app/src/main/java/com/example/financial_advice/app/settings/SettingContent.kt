@@ -54,4 +54,3 @@ fun Title(txt : String) {
         )
     }
 }
-

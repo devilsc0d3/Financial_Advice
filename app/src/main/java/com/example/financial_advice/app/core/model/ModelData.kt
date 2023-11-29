@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 
 data class ModelData  (
     var money : Int,
+    var category: String,
     var description : String? = null,
     var color : Color? = null,
     var data: DateFormat? = null,

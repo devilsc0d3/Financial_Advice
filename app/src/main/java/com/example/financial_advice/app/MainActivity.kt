@@ -10,7 +10,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,13 +22,13 @@ import com.example.financial_advice.app.data.DataContent
 import com.example.financial_advice.app.home.HomeContent
 import com.example.financial_advice.app.settings.SettingContent
 import com.example.financial_advice.app.core.ui.theme.Financial_AdviceTheme
+import com.example.financial_advice.app.home.subView.CguContent
 
 
-var money = 1200
-var mainData: Map<String, Pair<Color, List<ModelData>>> = mapOf(
-    "restoration" to Pair(Color.Red, listOf(ModelData(6, "tacos 2 viande"), ModelData(3, "sandwich"))),
-    "alcohol" to Pair(Color.Blue, listOf(ModelData(16, "pub st pi tu coco"), ModelData(15, "le pv"))),
-)
+var money = 1200f
+
+val mainData2 = mutableListOf<ModelData>()
+val suggestions = listOf("restoration", "alcohol", "transport", "shopping", "home", "health", "entertainment", "other")
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("MutableCollectionMutableState")
@@ -69,10 +68,13 @@ private fun NavigationManagement(navController: NavHostController) {
             HomeContent()
         }
         composable(route = Screens.Settings.route) {
-            SettingContent()
+            SettingContent(navController)
         }
         composable(route = Screens.Data.route) {
             DataContent()
+        }
+        composable(route = Screens.Cgu.route) {
+            CguContent()
         }
     }
 }
