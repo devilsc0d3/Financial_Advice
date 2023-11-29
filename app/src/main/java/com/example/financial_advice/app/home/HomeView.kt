@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.financial_advice.app.messages
+import com.example.financial_advice.app.mainData
 
 
 @Composable
@@ -29,7 +29,11 @@ fun HomeContent() {
         PieChart(data = listOf(20f, 30f, 50f), colors = listOf(Color.hsl(hue = 0.1F, saturation = 0.3F, lightness = 0.24F), Color(24, 106, 59), Color(27, 79, 114)))
         ButtonAdd { showDialog = true }
 
-        for (message in messages) { Message(message, "Caf", Color.White, 15.sp, FontWeight.W400) {} }
+        for ((category, data) in mainData) {
+            for (datas in data.second) {
+                Message(datas.money.toString(), category, Color.White, 15.sp, FontWeight.W400) {}
+            }
+        }
 
         if (showDialog) { AlertDialogTest(onDismiss = { showDialog = false }) }
     }

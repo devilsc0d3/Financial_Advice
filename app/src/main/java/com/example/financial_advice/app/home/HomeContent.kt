@@ -46,9 +46,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
-import com.example.financial_advice.app.messages
+import com.example.financial_advice.app.core.model.ModelData
+import com.example.financial_advice.app.mainData
 import com.example.financial_advice.app.money
-import com.example.financial_advice.app.namesList
 
 @Composable
 fun Message(txt: String, category: String, color: Color, size: TextUnit, weight: FontWeight, onClick: () -> Unit) {
@@ -154,6 +154,7 @@ fun PieChart(data: List<Float>, colors: List<Color>) {
 fun AlertDialogTest(onDismiss: () -> Unit) {
     val openDialog = remember { mutableStateOf(true) }
     var text by remember { mutableStateOf("0") }
+    var selectedCategory by remember { mutableStateOf("") }
 
     if (openDialog.value) {
         AlertDialog(
@@ -169,10 +170,11 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                     TextField(
                         value = text,
                         onValueChange = { text = it },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number
-                                )
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                     )
-                    DropDownMenu()
+                    DropDownMenu { selectedValue ->
+                        selectedCategory = selectedValue
+                    }
                 }
             },
 
@@ -187,10 +189,10 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                             openDialog.value = false
 
                             if (text != "0") {
-                                namesList.add(text)
                                 money -= text.toInt()
-                                messages = namesList.toTypedArray().plus(messages).toList().toTypedArray()
-                                namesList.clear()
+
+                                val dat = ModelData(money = text.toInt(), description = null)
+                                addMainData(selectedCategory, Color.Red, dat)
                             }
                             onDismiss()
                         }
@@ -202,11 +204,12 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
         )
     }
 }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DropDownMenu() {
+fun DropDownMenu(onItemSelected: (String) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    val suggestions = listOf("Kotlin", "Java", "Dart", "Python")
+    val suggestions = listOf("Kotlin", "Java", "restoration", "alcohol")
     var selectedText by remember { mutableStateOf("") }
     var textFieldSize by remember { mutableStateOf(Size.Zero)}
 
@@ -245,6 +248,7 @@ fun DropDownMenu() {
                     onClick = {
                         selectedText = label
                         expanded = false
+                        onItemSelected(label)
                     },
                     text = {
                         Text(text = label)
@@ -253,4 +257,13 @@ fun DropDownMenu() {
             }
         }
     }
+}
+
+fun addMainData(category: String,color: Color, data: ModelData) {
+    if (mainData.containsKey(category)) {
+        val list = mainData[category]?.second?.toMutableList()
+        list?.add(data)
+        mainData += mainData.plus(Pair(category, Pair(color, list?.toList()!!))).toMap()
+    } else
+    mainData += mainData.plus(Pair(category, Pair(color, listOf(data)))).toMap()
 }
