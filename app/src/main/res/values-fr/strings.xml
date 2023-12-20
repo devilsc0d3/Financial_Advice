@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">F.Afr</string>
+    <string name="lg">fr</string>
+
+    <!-- Home -->
+    <string name="diagram">Diagramme de progression</string>
+    <string name="add">ajouter</string>
+    <string name="enter_category">entre une categorie</string>
+    <string name="enter_value">entre une valeur</string>
+
+
+    <!-- Parameters -->
+    <string name="parameter">Parametre</string>
+    <string name="General">General</string>
+    <string name="Language">Langue</string>
+    <string name="Theme">Theme</string>
+    <string name="Data">Donnees</string>
+    <string name="share">Partager</string>
+    <string name="importcsv">Importer a partir dun CSV</string>
+    <string name="exportcsv">Exporter vers un CSV</string>
+    <string name="clear">Vider le cache</string>
+    <string name="help">Assistance</string>
+    <string name="ctrl">Supervision parentale</string>
+    <string name="contact">Contacter</string>
+    <string name="about">Conditions Generales dUtilisation</string>
+
+    <!-- CGU -->
+    <string name="cgu_title">Conditions generales dutilisation</string>
+    <string name="cgu_intro_title">1. Introduction</string>
+    <string name="cgu_intro_content">1.1 Ces Conditions Generales dUtilisation (ci-apres denommees "CGU") regissent lutilisation de lapplication de gestion de compte bancaire personnalisable (ci-apres denomme "lApplication") fournie par [Votre Nom ou le Nom de Votre Entreprise] (ci-apres denomme "Nous" ou "Notre").\n"
+        "1.2 En telechargeant, installant ou utilisant lApplication, vous acceptez detre lie par ces CGU. Si vous nacceptez pas ces CGU, veuillez ne pas utiliser lApplication.</string>
+    <string name="cgu_usage_title">2. Utilisation de lApplication</string>
+    <string name="cgu_usage_content">2.1 Vous etes autorise a utiliser lApplication a des fins personnelles et non commerciales.\n"
+        "2.2 Vous etes responsable de la confidentialite de vos informations de compte et de lactivite qui se produit sous votre compte.\n"
+        "2.3 Vous acceptez de ne pas utiliser lApplication a des fins illegales ou de maniere qui enfreint les droits de tiers.</string>
+    <string name="cgu_customization_title">3. Personnalisation de lApplication</string>
+    <string name="cgu_customization_content">3.1 LApplication vous permet de personnaliser lapparence en choisissant des themes, des couleurs et des categories.\n"
+        "3.2 Toutes les personnalisations sont enregistrees localement sur votre appareil et ne sont pas partagees en ligne.</string>
+    <string name="cgu_data_collection_title">4. Collecte et Stockage de Donnees</string>
+    <string name="cgu_data_collection_content">4.1 LApplication collecte et stocke localement les donnees que vous entrez, telles que les transactions, categories, et preferences de personnalisation.\n"
+        "4.2 Aucune donnee personnelle nest envoyee ou stockee en ligne sans votre consentement explicite.</string>
+    <string name="cgu_security_title">5. Securite</string>
+    <string name="cgu_security_content">5.1 Nous nous engageons a mettre en place des mesures de securite raisonnables pour proteger vos donnees. Cependant, vous comprenez et acceptez que la securite des informations transmises ou stockees ne peut etre garantie.\n"
+        "5.2 Nous ne sommes pas responsables de la perte, du vol ou de la divulgation non autorisee de vos donnees.</string>
+    <string name="cgu_updates_title">6. Mises a Jour</string>
+    <string name="cgu_updates_content">6.1 Nous nous reservons le droit de mettre a jour lApplication a tout moment.\n"
+        "6.2 Vous pouvez etre invite a mettre a jour lApplication regulierement.</string>
+    <string name="cgu_responsibilities_title">7. Responsabilites</string>
+    <string name="cgu_responsibilities_content">7.1 Nous ne sommes pas responsables des dommages directs, indirects, accessoires, speciaux, consecutifs ou exemplaires resultants de votre utilisation de lApplication ou de toute autre reclamation liee de quelque maniere que ce soit a votre utilisation de lApplication.\n"
+        "7.2 Vous acceptez de nous indemniser et de nous degager de toute responsabilite, ainsi que nos administrateurs, dirigeants, employes et agents, de toute reclamation ou demande, y compris les honoraires davocat raisonnables, faite par un tiers en raison ou decoulant de votre utilisation de lApplication ou de votre violation de ces CGU.</string>
+    <string name="cgu_changes_title">8. Modifications</string>
+    <string name="cgu_changes_content">8.1 Nous nous reservons le droit de modifier ces CGU a tout moment. Les modifications prendront effet des leur publication dans lApplication.\n"
+        "8.2 Nous vous encourageons a consulter regulierement ces CGU pour vous tenir informe de toute modification.</string>
+    <string name="cgu_contact_title">9. Contact</string>
+    <string name="cgu_contact_content">9.1 Pour toute question concernant ces CGU, veuillez nous contacter a faureleo123@gmail.com.\n"
+        "En utilisant lApplication, vous acceptez ces CGU. Merci de les lire attentivement.</string>
+    <string name="cgu_last_update">Derniere mise a jour : 29 Novembre 2023</string>
+</resources>

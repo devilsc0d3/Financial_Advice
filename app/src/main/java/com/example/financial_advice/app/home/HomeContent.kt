@@ -1,6 +1,5 @@
 package com.example.financial_advice.app.home
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardOptions
@@ -27,6 +25,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -37,17 +36,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
+import com.example.financial_advice.R
 import com.example.financial_advice.app.core.model.ModelData
 import com.example.financial_advice.app.mainData2
 import com.example.financial_advice.app.money
@@ -93,7 +93,7 @@ fun ButtonAdd(onClick: () -> Unit) {
             .fillMaxWidth()
             .wrapContentWidth(Alignment.CenterHorizontally)
             .padding(0.dp, 50.dp),
-        colors = ButtonDefaults.buttonColors(Color(24, 91, 100, 255))
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
     ) {
         Text(
             text = "+",
@@ -104,53 +104,6 @@ fun ButtonAdd(onClick: () -> Unit) {
     }
 }
 
-@Composable
-fun PieChart(data: List<Float>, colors: List<Color>) {
-    Box(
-        modifier = Modifier
-            .size(300.dp)
-            .padding(70.dp, 0.dp, 0.dp, 0.dp)
-    ) {
-        Canvas(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            val centerX = size.width / 2
-            val centerY = size.height / 2
-            val radius = java.lang.Float.min(centerX, centerY)
-            var startAngle = 0f
-
-            val total = data.sum()
-
-            data.forEachIndexed { index, value ->
-                val sweepAngle = 360 * (value / total)
-                drawArc(
-                    color = colors[index],
-                    startAngle = startAngle,
-                    sweepAngle = sweepAngle,
-                    useCenter = true,
-                    topLeft = Offset(centerX - radius, centerY - radius),
-                    size = Size(radius * 2, radius * 2)
-                )
-                startAngle += sweepAngle
-                drawCircle(
-                    color = Color(255, 255, 255, 255),
-                    radius = radius / 1.2f,
-                    center = Offset(centerX, centerY)
-                )
-            }
-        }
-
-        Text(
-            text = money.toString(),
-            color = Color.Black,
-            fontSize = 40.sp,
-            fontWeight = FontWeight(600),
-            modifier = Modifier
-                .align(Alignment.Center)
-        )
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -166,7 +119,7 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                 onDismiss()
             },
             title = {
-                Text(text = "enter value")
+                Text(text = stringResource(R.string.enter_value))
             },
             text = {
                 Column {
@@ -192,16 +145,18 @@ fun AlertDialogTest(onDismiss: () -> Unit) {
                         onClick = {
                             openDialog.value = false
 
-                            if (text != "0") {
+                            if (text.toFloat() != 0f) {
                                 money -= text.toFloat()
-
-                                val dat = ModelData(money = text.toInt(), description = null, category = selectedCategory)
+                                if (selectedCategory == "") {
+                                    selectedCategory = "Other"
+                                }
+                                val dat = ModelData(money = text.toFloat(), description = null, category = selectedCategory)
                                 mainData2.add(dat)
                             }
                             onDismiss()
                         }
                     ) {
-                        Text("Add")
+                        Text(stringResource(R.string.add))
                     }
                 }
             }
@@ -230,7 +185,7 @@ fun DropDownMenu2(onItemSelected: (String) -> Unit) {
                 .onGloballyPositioned { coordinates ->
                     textFieldSize = coordinates.size.toSize()
                 },
-            label = { Text("Enter a category") },
+            label = { Text(stringResource(R.string.enter_category)) },
             readOnly = true,
             trailingIcon = {
                 Icon(
@@ -280,7 +235,7 @@ fun Diagram(finalValue: Float, variableValue: Float) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Diagram de progression", color = Color.Gray, fontSize = 20.sp, fontWeight = FontWeight(800))
+            Text(text = stringResource(R.string.diagram), color = Color.Gray, fontSize = 20.sp, fontWeight = FontWeight(800))
             Text(
                 text = money.toString(),
                 color = Color.Gray,

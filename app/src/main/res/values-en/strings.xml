@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">F.Ade</string>
-    <string name="lg">de</string>
+    <string name="app_name">F.Aen</string>
+    <string name="lg">en</string>
 
-    / <!-- Home -->
+    <!-- Home -->
     <string name="diagram">Diagram of progression</string>
     <string name="add">add</string>
     <string name="enter_category">enter a category</string>
     <string name="enter_value">enter a value</string>
 
-    /    <!-- Parameters -->
+
+    <!-- Parameters -->
     <string name="parameter">Parameter</string>
     <string name="General">General</string>
     <string name="Language">Language</string>
@@ -56,5 +57,4 @@
         "By using the Application, you agree to these Terms. Thank you for reading them carefully.</string>
     <string name="cgu_last_update">Last update: November 29, 2023</string>
 </resources>
-
 

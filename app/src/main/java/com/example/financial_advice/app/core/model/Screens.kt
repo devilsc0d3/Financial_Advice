@@ -5,5 +5,9 @@ sealed class Screens(val route: String) {
     object Settings : Screens("settings")
 
     object Cgu : Screens("cgu")
+
+    object Language : Screens("language")
+
+    object Theme : Screens("theme")
     object Data : Screens("data")
 }

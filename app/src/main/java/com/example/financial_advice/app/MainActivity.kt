@@ -22,11 +22,12 @@ import com.example.financial_advice.app.data.DataContent
 import com.example.financial_advice.app.home.HomeContent
 import com.example.financial_advice.app.settings.SettingContent
 import com.example.financial_advice.app.core.ui.theme.Financial_AdviceTheme
-import com.example.financial_advice.app.home.subView.CguContent
+import com.example.financial_advice.app.settings.subView.CguContent
+import com.example.financial_advice.app.settings.subView.Language
+import com.example.financial_advice.app.settings.subView.Theme
 
 
 var money = 1200f
-
 val mainData2 = mutableListOf<ModelData>()
 val suggestions = listOf("restoration", "alcohol", "transport", "shopping", "home", "health", "entertainment", "other")
 
@@ -75,6 +76,12 @@ private fun NavigationManagement(navController: NavHostController) {
         }
         composable(route = Screens.Cgu.route) {
             CguContent()
+        }
+        composable(route = Screens.Theme.route) {
+            Theme(navController)
+        }
+        composable(route = Screens.Language.route) {
+            Language(navController)
         }
     }
 }

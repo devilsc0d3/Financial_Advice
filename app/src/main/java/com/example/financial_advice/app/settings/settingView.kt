@@ -10,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import com.example.financial_advice.R
 
 
 @Composable
@@ -23,12 +25,13 @@ fun SettingContent(navHostController: NavHostController) {
     ){
         val context = LocalContext.current
 
-        Title("General")
-        Widget("Language", Color.Black) {}
-        Widget("Theme", Color.Black) {}
-
-        Title("data")
-        Widget("share", Color.Black,onClick = {
+        Title(stringResource(id = R.string.General))
+        Widget(stringResource(id = R.string.Language), Color.Black) {
+            navHostController.navigate("language") }
+        Widget(stringResource(id = R.string.Theme), Color.Black) {
+            navHostController.navigate("theme") }
+        Title(stringResource(id = R.string.Data))
+        Widget(stringResource(id = R.string.share), Color.Black,onClick = {
             val sendIntent = Intent().apply {
                 action = Intent.ACTION_SEND
                 putExtra(Intent.EXTRA_TEXT, "For a better manager of account, Download Financial_Advice by L.F ! ...")
@@ -36,14 +39,13 @@ fun SettingContent(navHostController: NavHostController) {
             }
             context.startActivity(Intent.createChooser(sendIntent, "Share via"))
         })
-        Widget("import", Color.Black) {}
-        Widget("export", Color.Black) {}
-        Widget("Clear cache", Color.Red) {}
+        Widget(stringResource(id = R.string.importcsv), Color.Black) {}
+        Widget(stringResource(id = R.string.exportcsv), Color.Black) {}
+        Widget(stringResource(id = R.string.clear), Color.Red) {}
 
-        Title("Assistance")
-        Widget("parent", Color.Black) {}
-        Widget("contact", Color.Black) {}
-        Widget("CGU", Color.Black) { navHostController.navigate("cgu") }
+        Title(stringResource(id = R.string.help))
+        Widget(stringResource(id = R.string.ctrl), Color.Black) {}
+        Widget(stringResource(id = R.string.contact), Color.Black) {}
+        Widget(stringResource(id = R.string.about), Color.Black) { navHostController.navigate("cgu") }
     }
-
 }
